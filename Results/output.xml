@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.11.4 on win32)" generated="20230823 15:49:16.384" rpa="false" schemaversion="4">
+<suite id="s1" name="Tests" source="C:\Users\Sadhana\PycharmProjects\TimeLine\Tests\Tests.robot">
+<kw name="Run Keywords" library="BuiltIn" type="SETUP">
+<arg>Launch application</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Launch application" library="Keywords">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>${Browser_Type}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20230823 15:49:17.017" level="INFO">Opening browser 'chrome' to base url 'https://gtjwn.csb.app/'.</msg>
+<status status="PASS" starttime="20230823 15:49:17.015" endtime="20230823 15:49:24.728"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Go_To_First_Button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230823 15:49:24.728" endtime="20230823 15:49:27.168"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20230823 15:49:27.168" endtime="20230823 15:49:27.319"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Application launched successfully!</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230823 15:49:27.319" level="INFO">Application launched successfully!</msg>
+<status status="PASS" starttime="20230823 15:49:27.319" endtime="20230823 15:49:27.319"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:17.015" endtime="20230823 15:49:27.320"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:17.014" endtime="20230823 15:49:27.320"/>
+</kw>
+<test id="s1-t1" name="TC1: Focus on first event on application launch | Go to First and Previous buttons disabled" line="14">
+<kw name="Focus on first event" library="Keywords">
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${go_to_first_attr_value}</var>
+<arg>${Go_To_First_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:27.353" level="INFO">${go_to_first_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:27.322" endtime="20230823 15:49:27.353"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${previous_attr_value}</var>
+<arg>${Previous_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:27.378" level="INFO">${previous_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:27.354" endtime="20230823 15:49:27.378"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${go_to_first_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:27.378" endtime="20230823 15:49:27.379"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${previous_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:27.379" endtime="20230823 15:49:27.379"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:27.322" endtime="20230823 15:49:27.379"/>
+</kw>
+<doc>This test case will check focus on 1st timeline event and disabled buttons</doc>
+<tag>Functional</tag>
+<tag>Positive</tag>
+<status status="PASS" starttime="20230823 15:49:27.320" endtime="20230823 15:49:27.379"/>
+</test>
+<test id="s1-t2" name="TC2: Previous and Next button functionality check" line="20">
+<kw name="Previous and Next buttons" library="Keywords">
+<kw name="Reload Page" library="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" starttime="20230823 15:49:27.382" endtime="20230823 15:49:28.244"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Next_Button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230823 15:49:28.244" endtime="20230823 15:49:29.710"/>
+</kw>
+<for flavor="IN">
+<var>${event}</var>
+<value>${TimeLine_Item_Node}</value>
+<iter>
+<var name="${event}">xpath=//div[@data-testid='timeline-circle']</var>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Next_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:29.711" level="INFO">Clicking element 'xpath=//button[@title='Next']'.</msg>
+<status status="PASS" starttime="20230823 15:49:29.711" endtime="20230823 15:49:29.842"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230823 15:49:31.843" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230823 15:49:29.842" endtime="20230823 15:49:31.843"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${current_event}</var>
+<arg>${event}</arg>
+<arg>class</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:31.915" level="INFO">${current_event} = Shape-kbbdSK cSmnsA timeline-circle horizontal in-active</msg>
+<status status="PASS" starttime="20230823 15:49:31.844" endtime="20230823 15:49:31.915"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${current_event}</arg>
+<arg>in-active</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230823 15:49:31.915" endtime="20230823 15:49:31.915"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Previous_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:31.916" level="INFO">Clicking element 'xpath=//button[@title='Previous']'.</msg>
+<status status="PASS" starttime="20230823 15:49:31.915" endtime="20230823 15:49:31.979"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230823 15:49:33.980" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230823 15:49:31.979" endtime="20230823 15:49:33.980"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${current_event}</var>
+<arg>${event}</arg>
+<arg>class</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:34.005" level="INFO">${current_event} = Shape-kbbdSK cSmnsA timeline-circle horizontal active</msg>
+<status status="PASS" starttime="20230823 15:49:33.980" endtime="20230823 15:49:34.005"/>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<arg>${current_event}</arg>
+<arg>in-active</arg>
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230823 15:49:34.006" endtime="20230823 15:49:34.006"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:29.710" endtime="20230823 15:49:34.006"/>
+</iter>
+<status status="PASS" starttime="20230823 15:49:29.710" endtime="20230823 15:49:34.006"/>
+</for>
+<status status="PASS" starttime="20230823 15:49:27.381" endtime="20230823 15:49:34.006"/>
+</kw>
+<doc>This test case will check the Previous and Next button functionality</doc>
+<tag>Functional</tag>
+<tag>Positive</tag>
+<status status="PASS" starttime="20230823 15:49:27.380" endtime="20230823 15:49:34.007"/>
+</test>
+<test id="s1-t3" name="TC3: Focus on last event | Go to Last and Next buttons disabled | Go to last button check" line="26">
+<kw name="Focus on last event" library="Keywords">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Go_To_Last_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:34.011" level="INFO">Clicking element 'xpath=//button[@title='Go to Last']'.</msg>
+<status status="PASS" starttime="20230823 15:49:34.010" endtime="20230823 15:49:34.116"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230823 15:49:36.118" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230823 15:49:34.116" endtime="20230823 15:49:36.118"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${go_to_last_attr_value}</var>
+<arg>${Go_To_Last_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:36.164" level="INFO">${go_to_last_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:36.119" endtime="20230823 15:49:36.164"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${next_attr_value}</var>
+<arg>${Next_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:36.183" level="INFO">${next_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:36.164" endtime="20230823 15:49:36.183"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${go_to_last_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:36.183" endtime="20230823 15:49:36.183"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${next_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:36.183" endtime="20230823 15:49:36.184"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:34.009" endtime="20230823 15:49:36.184"/>
+</kw>
+<doc>This test case will check focus on last timeline event, go to last and disabled buttons</doc>
+<tag>Functional</tag>
+<tag>Positive</tag>
+<status status="PASS" starttime="20230823 15:49:34.008" endtime="20230823 15:49:36.184"/>
+</test>
+<test id="s1-t4" name="TC4: Go to First and Previous buttons enabled" line="32">
+<kw name="Go to First and Previous buttons enable" library="Keywords">
+<kw name="Reload Page" library="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" starttime="20230823 15:49:36.187" endtime="20230823 15:49:37.289"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Next_Button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230823 15:49:37.289" endtime="20230823 15:49:38.482"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Next_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:38.483" level="INFO">Clicking element 'xpath=//button[@title='Next']'.</msg>
+<status status="PASS" starttime="20230823 15:49:38.482" endtime="20230823 15:49:38.576"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${go_to_first_attr_value}</var>
+<arg>${Go_To_First_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:38.595" level="INFO">${go_to_first_attr_value} = false</msg>
+<status status="PASS" starttime="20230823 15:49:38.576" endtime="20230823 15:49:38.595"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${previous_attr_value}</var>
+<arg>${Previous_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:38.612" level="INFO">${previous_attr_value} = false</msg>
+<status status="PASS" starttime="20230823 15:49:38.595" endtime="20230823 15:49:38.612"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${go_to_first_attr_value}</arg>
+<arg>false</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:38.613" endtime="20230823 15:49:38.614"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${previous_attr_value}</arg>
+<arg>false</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:38.614" endtime="20230823 15:49:38.615"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:36.186" endtime="20230823 15:49:38.615"/>
+</kw>
+<doc>This test case will check focus go to first and Previous button functionality and enablement</doc>
+<tag>Functional</tag>
+<tag>Positive</tag>
+<status status="PASS" starttime="20230823 15:49:36.185" endtime="20230823 15:49:38.615"/>
+</test>
+<test id="s1-t5" name="TC5: Page refresh shifts the focus on the first node" line="38">
+<kw name="Focus on last event" library="Keywords">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Go_To_Last_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:38.618" level="INFO">Clicking element 'xpath=//button[@title='Go to Last']'.</msg>
+<status status="PASS" starttime="20230823 15:49:38.618" endtime="20230823 15:49:38.694"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230823 15:49:40.695" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230823 15:49:38.694" endtime="20230823 15:49:40.695"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${go_to_last_attr_value}</var>
+<arg>${Go_To_Last_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:40.720" level="INFO">${go_to_last_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:40.695" endtime="20230823 15:49:40.720"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${next_attr_value}</var>
+<arg>${Next_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:40.739" level="INFO">${next_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:40.720" endtime="20230823 15:49:40.739"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${go_to_last_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:40.739" endtime="20230823 15:49:40.739"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${next_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:40.739" endtime="20230823 15:49:40.740"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:38.618" endtime="20230823 15:49:40.740"/>
+</kw>
+<kw name="Reload Page" library="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" starttime="20230823 15:49:40.741" endtime="20230823 15:49:41.670"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230823 15:49:44.676" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20230823 15:49:41.675" endtime="20230823 15:49:44.676"/>
+</kw>
+<kw name="Focus on first event" library="Keywords">
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${go_to_first_attr_value}</var>
+<arg>${Go_To_First_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:44.698" level="INFO">${go_to_first_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:44.677" endtime="20230823 15:49:44.698"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${previous_attr_value}</var>
+<arg>${Previous_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:44.717" level="INFO">${previous_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:44.698" endtime="20230823 15:49:44.717"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${go_to_first_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:44.718" endtime="20230823 15:49:44.718"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${previous_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:44.718" endtime="20230823 15:49:44.718"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:44.676" endtime="20230823 15:49:44.718"/>
+</kw>
+<doc>This test case will check page refresh functionality</doc>
+<tag>Functional</tag>
+<tag>Positive</tag>
+<status status="PASS" starttime="20230823 15:49:38.617" endtime="20230823 15:49:44.719"/>
+</test>
+<test id="s1-t6" name="TC6: Switch to Dark/Light modes" line="47">
+<kw name="Switching to Light mode" library="Keywords">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Dark_Mode_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:44.721" level="INFO">Clicking element 'xpath=//button[@title='Switch to Dark Mode']'.</msg>
+<status status="PASS" starttime="20230823 15:49:44.721" endtime="20230823 15:49:44.806"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Light_Mode_Button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230823 15:49:44.807" endtime="20230823 15:49:44.821"/>
+</kw>
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>${Dark_Mode_Button}</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<msg timestamp="20230823 15:49:44.831" level="INFO">Current page does not contain element 'xpath=//button[@title='Switch to Dark Mode']'.</msg>
+<status status="PASS" starttime="20230823 15:49:44.821" endtime="20230823 15:49:44.831"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:44.721" endtime="20230823 15:49:44.831"/>
+</kw>
+<kw name="Switching to Dark mode" library="Keywords">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Light_Mode_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:44.833" level="INFO">Clicking element 'xpath=//button[@title='Switch to Light Mode']'.</msg>
+<status status="PASS" starttime="20230823 15:49:44.832" endtime="20230823 15:49:44.885"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Dark_Mode_Button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230823 15:49:44.885" endtime="20230823 15:49:44.896"/>
+</kw>
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>${Light_Mode_Button}</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<msg timestamp="20230823 15:49:44.905" level="INFO">Current page does not contain element 'xpath=//button[@title='Switch to Light Mode']'.</msg>
+<status status="PASS" starttime="20230823 15:49:44.896" endtime="20230823 15:49:44.905"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:44.832" endtime="20230823 15:49:44.905"/>
+</kw>
+<doc>This test case will check switching to Light and Dark modes</doc>
+<tag>Functional</tag>
+<tag>Positive</tag>
+<status status="PASS" starttime="20230823 15:49:44.720" endtime="20230823 15:49:44.905"/>
+</test>
+<test id="s1-t7" name="TC7: Read more/less link check" line="54">
+<kw name="Focus on last event" library="Keywords">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Go_To_Last_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:44.908" level="INFO">Clicking element 'xpath=//button[@title='Go to Last']'.</msg>
+<status status="PASS" starttime="20230823 15:49:44.908" endtime="20230823 15:49:44.981"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230823 15:49:46.982" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230823 15:49:44.981" endtime="20230823 15:49:46.982"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${go_to_last_attr_value}</var>
+<arg>${Go_To_Last_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:47.013" level="INFO">${go_to_last_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:46.982" endtime="20230823 15:49:47.013"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${next_attr_value}</var>
+<arg>${Next_Button}</arg>
+<arg>aria-disabled</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230823 15:49:47.044" level="INFO">${next_attr_value} = true</msg>
+<status status="PASS" starttime="20230823 15:49:47.013" endtime="20230823 15:49:47.044"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${go_to_last_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:47.044" endtime="20230823 15:49:47.045"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${next_attr_value}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230823 15:49:47.045" endtime="20230823 15:49:47.045"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:44.907" endtime="20230823 15:49:47.045"/>
+</kw>
+<kw name="Read more link presence" library="Keywords">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Read_More_Link}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230823 15:49:47.047" endtime="20230823 15:49:47.068"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Read_More_Link}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:47.070" level="INFO">Clicking element 'xpath=//span[@role='button']//span[contains(text(), 'read more')]'.</msg>
+<status status="PASS" starttime="20230823 15:49:47.068" endtime="20230823 15:49:47.168"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230823 15:49:49.170" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230823 15:49:47.169" endtime="20230823 15:49:49.170"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>${Read_Less_Link}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20230823 15:49:49.185" level="INFO">Current page contains element 'xpath=//span[@role='button']//span[contains(text(), 'read less')]'.</msg>
+<status status="PASS" starttime="20230823 15:49:49.170" endtime="20230823 15:49:49.185"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:47.047" endtime="20230823 15:49:49.185"/>
+</kw>
+<kw name="Read less link presence" library="Keywords">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Read_Less_Link}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230823 15:49:49.186" level="INFO">Clicking element 'xpath=//span[@role='button']//span[contains(text(), 'read less')]'.</msg>
+<status status="PASS" starttime="20230823 15:49:49.186" endtime="20230823 15:49:49.246"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Read_More_Link}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20230823 15:49:49.246" endtime="20230823 15:49:49.259"/>
+</kw>
+<kw name="Page Should Not Contain Element" library="SeleniumLibrary">
+<arg>${Read_Less_Link}</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<msg timestamp="20230823 15:49:49.271" level="INFO">Current page does not contain element 'xpath=//span[@role='button']//span[contains(text(), 'read less')]'.</msg>
+<status status="PASS" starttime="20230823 15:49:49.260" endtime="20230823 15:49:49.271"/>
+</kw>
+<status status="PASS" starttime="20230823 15:49:49.185" endtime="20230823 15:49:49.271"/>
+</kw>
+<doc>This test case will check the read more link</doc>
+<tag>Functional</tag>
+<tag>Positive</tag>
+<status status="PASS" starttime="20230823 15:49:44.906" endtime="20230823 15:49:49.272"/>
+</test>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20230823 15:49:49.273" endtime="20230823 15:49:52.225"/>
+</kw>
+<doc>This project will test the timeline application</doc>
+<status status="PASS" starttime="20230823 15:49:16.388" endtime="20230823 15:49:52.226"/>
+</suite>
+<statistics>
+<total>
+<stat pass="7" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="7" fail="0" skip="0">Functional</stat>
+<stat pass="7" fail="0" skip="0">Positive</stat>
+</tag>
+<suite>
+<stat pass="7" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20230823 15:49:16.792" level="ERROR">Error in file 'C:\Users\Sadhana\PycharmProjects\TimeLine\Tests\Tests.robot' on line 6: Invalid resource file extension '.py'. Supported extensions are '.json', '.resource', '.rest', '.robot', '.rsrc', '.rst', '.tsv' and '.txt'.</msg>
+</errors>
+</robot>
